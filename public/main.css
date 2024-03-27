@@ -1,0 +1,43 @@
+body{
+    margin: 0px;
+}
+
+.nav {
+    padding: 20px;
+    background-color: rgb(186, 186, 186);
+    color: white;
+}
+
+div>.nav {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    background: white;
+}
+
+.nav a {
+    margin-right: 30px;
+    text-decoration-line: none;
+    color: white;
+}
+
+.nav a:hover {
+    color: pink;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+.location_right {
+    float: right;
+}
+
+form {
+    margin: 20px;
+}
+
+.login{
+    display: inline-block;
+    width: 75px;
+}
