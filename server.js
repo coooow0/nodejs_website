@@ -6,7 +6,7 @@ app.listen(3000, ()=>{
 })
 
 app.get('/', (req, res)=>{
-    res.send('반가와용')
+    res.sendFile(__dirname + '/first_page.html')
 })
 
 app.get('/name', (req, res)=> {
