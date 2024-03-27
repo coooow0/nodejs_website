@@ -2,21 +2,24 @@ const express = require('express')
 const app = express()
 const { MongoClient } = require('mongodb')
 
+require('dotenv').config()
+
 app.use(express.static(__dirname + '/public'))
 app.use(express.static(__dirname + '/node_modules'))
 
 let db
-const url = 'mongodb+srv://<username>:<password>@cluster0.csxqnjy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const url = process.env.MONGO_DB_PATH
 new MongoClient(url).connect().then((client) => {
     console.log('DB연결성공')
     db = client.db('chattingWeb')
 
-    app.listen(3000, () => {
+    app.listen(process.env.PORT, () => {
         console.log('https://localhost:3000 포트에서 실행중')
     })
 }).catch((err) => {
     console.log(err)
 })
+
 
 
 app.get('/', (req, res) => {
@@ -29,4 +32,8 @@ app.get('/name', (req, res) => {
 
 app.get('/hello', (req, res) => {
     res.sendFile(__dirname + '/index.html')
+})
+
+app.get('/news', ()=>{
+    db.collection('post').insertOne({title:'어쩌고'})
 })
