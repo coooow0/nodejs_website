@@ -12,12 +12,14 @@
 <body>
     <%- include('nav.ejs') %>
     <h1 class="hello-h1">🍥어서오세요🍥</h1>
+    
     <div class="login-wrapper">
         <h2>Login</h2>
         <form method="POST" id="login-form" action="/login">
-            <input type="text" name="userName" placeholder="Username">
-            <input type="password" name="userPassword" placeholder="Password">
-            <input type="submit" value="Login">
+            <input name="username"  placeholder="username">
+            <input name="password" type="password" placeholder="password">
+            <button type="submit">전송</button>
+            <!-- <input type="submit" value="Login"> -->
         </form>
     </div>
 
