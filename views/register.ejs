@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <h1 class="hello-h1">🍥어서오세요🍥</h1>
+    
+    <div class="login-wrapper">
+        <h2>Register</h2>
+        <form method="POST" id="login-form" action="/register">
+            <input name="username"  placeholder="username">
+            <input name="password" type="password" placeholder="password">
+            <button type="submit">전송</button>
+            <!-- <input type="submit" value="Login"> -->
+        </form>
+    </div>
+
+</body>
+
+</html>
