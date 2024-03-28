@@ -7,6 +7,8 @@ require('dotenv').config()
 app.use(express.static(__dirname + '/public'))
 app.use(express.static(__dirname + '/node_modules'))
 
+app.set('view engine', 'ejs')
+
 let db
 const url = process.env.MONGO_DB_PATH
 new MongoClient(url).connect().then((client) => {
@@ -37,3 +39,10 @@ app.get('/hello', (req, res) => {
 app.get('/news', ()=>{
     db.collection('post').insertOne({title:'어쩌고'})
 })
+
+app.get('/list', async(req, res)=>{
+    let result = await db.collection('post').find().toArray()
+    res.send(result[0].title)
+})
+
+// app.get('/chatting', async(req, res))
