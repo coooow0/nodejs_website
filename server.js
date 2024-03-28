@@ -15,9 +15,9 @@ const LocalStrategy = require('passport-local')
 
 app.use(passport.initialize())
 app.use(session({
-  secret: '암호화에 쓸 비번',
-  resave : false,
-  saveUninitialized : false
+  secret: process.env.SESSION_PSWD,
+  resave : false, // 유저가 서버로 요청할 때마다 세션 갱신할 것인지?
+  saveUninitialized : false // 로그인 안 해도 세션 만들것인지?
 }))
 
 app.use(passport.session()) 
@@ -40,7 +40,7 @@ new MongoClient(url).connect().then((client) => {
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
-
+    
 })
 
 app.get('/name', (req, res) => {
