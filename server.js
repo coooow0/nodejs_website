@@ -9,6 +9,19 @@ app.use(express.static(__dirname + '/node_modules'))
 
 app.set('view engine', 'ejs')
 
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
+
+app.use(passport.initialize())
+app.use(session({
+  secret: '암호화에 쓸 비번',
+  resave : false,
+  saveUninitialized : false
+}))
+
+app.use(passport.session()) 
+
 let db
 const url = process.env.MONGO_DB_PATH
 new MongoClient(url).connect().then((client) => {
@@ -27,7 +40,7 @@ new MongoClient(url).connect().then((client) => {
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
-    
+
 })
 
 app.get('/name', (req, res) => {
