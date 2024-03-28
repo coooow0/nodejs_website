@@ -20,6 +20,7 @@ new MongoClient(url).connect().then((client) => {
     })
 }).catch((err) => {
     console.log(err)
+    
 })
 
 
@@ -45,4 +46,6 @@ app.get('/list', async(req, res)=>{
     res.send(result[0].title)
 })
 
-// app.get('/chatting', async(req, res))
+app.get('/chatting', async(req, res)=>{
+    res.render('chatting.ejs')
+})

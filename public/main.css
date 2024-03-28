@@ -1,4 +1,12 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
+    font-family: 'GmarketSansMedium';
     margin: 0px;
 }
 
@@ -25,16 +33,12 @@ div>.nav {
     color: pink;
 }
 
-.logo {
-    font-weight: bold;
-}
-
-.location_right {
-    float: right;
-}
-
-form {
+.index-form {
     margin: 20px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
 }
 
 .login {
@@ -42,33 +46,173 @@ form {
     width: 75px;
 }
 
-.chat-screen {
-    width: 100%;
+.location_right {
+    float: right;
 }
 
-.chat-box {
-    margin-top: 15px;
+/* //////////////////////////////////////////////////// */
+
+.chat-body {
+    background-image: linear-gradient(23deg,
+            hsl(49deg 100% 69%) 0%,
+            hsl(16deg 80% 61%) 2%,
+            hsl(330deg 81% 24%) 12%,
+            hsl(259deg 100% 15%) 50%,
+            hsl(212deg 100% 25%)88%,
+            hsl(197deg 100% 30%) 98%,
+            hsl(183deg 79% 36%) 100%);
+    height: 100vh;
+    font-family: 'GmarketSansMedium';
+}
+
+.button {
+    border: none;
+    padding: 0.625em;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.button:hover {
+    filter: brightness(0.9);
+}
+
+.button:active {
+    transform: translateY(2px);
+    /* 클릭시 버튼이 움직임 */
+}
+
+.person-selector {
     display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 3em auto 1em;
+    max-width: 40em;
 }
 
-.chat-box span {
-    padding: 10px;
-    background: #eee;
+.person-selector-button {
+    width: 100%;
+    background-color: #15202b;
+    color: #fff;
+    font-family: 'GmarketSansMedium';
+    font-size: 1.2em;
 }
 
-.mine {
-    justify-content: end;
+.active-person {
+    background-color: #08529d;
+    box-shadow: 0 0 0.5em 0.1em #c3c3c333;
+}
+
+.chat-container {
+    background-color: #15202b;
+    border-radius: 0.5em;
+    padding: 0.5em 1.25em;
+    margin: auto;
+    max-width: 37.5em;
+    height: 37.5em;
+    box-shadow: 0 0 1.25em 0.5em #c3c3c333;
+}
+
+.chat-header {
+    margin-bottom: 1em;
+    color: #fff;
+}
+
+.chat-header h2 {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.chat-messages {
+    height: 23em;
+    overflow-y: scroll;
+}
+
+.chat-messages::-webkit-scrollbar {
+    display: none;
+}
+
+.message {
+    padding: 0.625em;
+    border-radius: 1em;
+    margin-bottom: 0.625em;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+.message-sender {
+    font-weight: bold;
+    margin-bottom: 0.31em;
+
+}
+
+.message-text {
+    font-size: 1em;
+    margin-bottom: 0.31em;
+    word-wrap: break-word;
+}
+
+.message-timestamp {
+    font-size: 0.75em;
+    text-align: right;
+}
+
+.blue-bg {
+    background-color: #1c9bef;
+}
+
+.gray-bg {
+    background-color: #3d5365;
+}
+
+.chat-input-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* 추가 */
+    margin-top: 2em;
 }
 
 .chat-input {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.5em;
+    background-color: #f5f5f5;
+    font-family: 'GmarketSansMedium';
+    font-size: 1em;
+    flex-grow: 1;
 }
 
-.chat-button {
-    padding: 10px;
+.send-button {
+    background-color: #1c9bef;
+    color: #fff;
+    font-size: 1em;
+    font-family: 'GmarketSansMedium';
+    font-weight: bold;
+    margin-left: 0.5em;
     border: none;
-    background: lightgrey;
-    border-radius: 5px;
+    /* 추가 */
+    border-radius: 0.5em;
+    /* 추가 */
+    padding: 0.625em 1em;
+    /* 추가 */
+}
+
+.clear-chat-button {
+    display: block;
+    margin: 2.5em auto;
+    font-family: 'GmarketSansMedium';
+}
+
+.login-button {
+    font-family: 'GmarketSansMedium';
+    padding: 10px 20px;
+    border: none;
+    background-color: #1c9bef;
+    color: white;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #08529d;
 }
