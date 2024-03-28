@@ -16,19 +16,15 @@
         <a class="location_right">로그인</a>
         <a href="/chatting" class="location_right">채팅하기</a>
     </div>
-
-    <form class="index-form">
-        <div>
-            <h1>어서오세요</h1>
-            <label for="username" class="login">아이디</label>
-            <input type="text" id="username">
-            <br>
-            <label for="password" class="login">비밀번호</label>
-            <input type="password" id="password">
-            <input type="button" class="login-button" value="Login" style="font-family: 'GmarketSansMedium';">
-        </div>
-
-    </form>
+    <h1 class="hello-h1">🍥어서오세요🍥</h1>
+    <div class="login-wrapper">
+        <h2>Login</h2>
+        <form method="post" id="login-form">
+            <input type="text" name="userName" placeholder="Username">
+            <input type="password" name="userPassword" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
 
 </body>
 
