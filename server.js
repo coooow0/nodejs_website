@@ -27,6 +27,7 @@ new MongoClient(url).connect().then((client) => {
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
+    
 })
 
 app.get('/name', (req, res) => {
