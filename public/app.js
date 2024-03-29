@@ -80,26 +80,71 @@ clearChatBtn.addEventListener('click', () => {
 
 document.querySelector('.chat-input-form').addEventListener('submit', sendMessage);
 
+function sendMessage(e) {
+    e.preventDefault();
+
+    const timestamp = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    const senderName = getActivePersonName();
+    const messageText = document.querySelector('.chat-input').value;
+
+    // 새로운 메시지 엘리먼트 생성
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+
+    // senderName이 '영이'일 때 파란색, 그 외에는 회색 배경색을 가진 message 클래스 추가
+    messageElement.classList.add(senderName === '영이' ? 'blue-bg' : 'gray-bg');
+
+    messageElement.innerHTML = `
+        <div class="message-sender">${senderName}</div>
+        <div class="message-text">${messageText}</div>
+        <div class="message-timestamp">${timestamp}</div>
+    `;
+
+    // 생성한 메시지를 채팅 메시지들 엘리먼트에 추가
+    const chatMessages = document.querySelector('.chat-messages');
+    chatMessages.appendChild(messageElement);
+
+    // 입력 필드 초기화
+    document.querySelector('.chat-input').value = '';
+
+    // 스크롤을 가장 아래로 이동
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 
 function sendMessage(e) {
     e.preventDefault();
 
     const timestamp = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    const message = {
-        sender: document.querySelector('.active-person').innerText,
-        text: document.querySelector('.chat-input').value,
-        timestamp,
-    };
+    const senderName = getActivePersonName();
+    const messageText = document.querySelector('.chat-input').value;
 
-    // 로컬스토리지 또는 다른 저장 방법을 사용하여 메시지 저장
+    // 새로운 메시지 엘리먼트 생성
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
 
+    // senderName이 '영이'일 때 파란색, 그 외에는 회색 배경색을 가진 message 클래스 추가
+    messageElement.classList.add(senderName === '영이' ? 'blue-bg' : 'gray-bg');
+
+    messageElement.innerHTML = `
+        <div class="message-sender">${senderName}</div>
+        <div class="message-text">${messageText}</div>
+        <div class="message-timestamp">${timestamp}</div>
+    `;
+
+    // 생성한 메시지를 채팅 메시지들 엘리먼트에 추가
     const chatMessages = document.querySelector('.chat-messages');
-    chatMessages.innerHTML += `<div class="message">
-                                    <div class="message-sender">${message.sender}</div>
-                                    <div class="message-text">${message.text}</div>
-                                    <div class="message-timestamp">${message.timestamp}</div>
-                                </div>`;
+    chatMessages.appendChild(messageElement);
 
+    // 입력 필드 초기화
     document.querySelector('.chat-input').value = '';
+
+    // 스크롤을 가장 아래로 이동
     chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+
+function getActivePersonName() {
+    const activePersonButton = document.querySelector('.active-person');
+    return activePersonButton.textContent;
 }
