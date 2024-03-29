@@ -53,25 +53,29 @@ new MongoClient(url).connect().then((client) => {
 
 })
 
-function account(req, res, next){
-    if (!req.user){
+function account(req, res, next) {
+    if (!req.user) {
         res.render('login.ejs')
     }
     else next()
 }
 
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.isAuthenticated();
+    next();
+});
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 })
 
 
-app.get('/list',account, async (req, res) => {
+app.get('/list', account, async (req, res) => {
     let result = await db.collection('post').find().toArray()
     res.send(result[0].title)
 })
 
-app.get('/chatting',account, async (req, res) => {
+app.get('/chatting', account, async (req, res) => {
     res.render('chatting.ejs')
 })
 
@@ -164,8 +168,11 @@ app.post('/chatting', async (req, res) => {
 
 // 서버 측 코드
 app.get('/logout', (req, res) => {
-	req.logout(() => {
-		// 로그아웃 처리 후 실행할 코드
-		res.redirect('/login'); // 로그아웃 후 리다이렉트할 페이지
-	})
+    req.logout(() => {
+        // 로그아웃 처리 후 실행할 코드
+        res.redirect('/login'); // 로그아웃 후 리다이렉트할 페이지
+    })
 })
+app.get('/check-auth', (req, res) => {
+    res.json({ isAuthenticated: req.isAuthenticated() });
+});

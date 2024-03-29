@@ -6,22 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/main.css" rel="stylesheet">
-
 </head>
 
 <body>
     <div class="nav">
         <a class="logo" href="/">CoOoOw0</a>
         <a class="location_right">게시판</a>
-        <a class="location_right" href="/logout">로그아웃</a>
-        <a class="location_right" href="/login">로그인</a>
-        <a class="location_right" href="/register">회원가입</a>
+        <a id="logoutLink" class="location_right" href="/logout">로그아웃</a>
+        <a id="loginLink" class="location_right" href="/login">로그인</a>
+        <a id="registerLink" class="location_right" href="/register">회원가입</a>
         <a href="/chatting" class="location_right">채팅하기</a>
     </div>
     <h1 class="hello-h1">🍥어서오세요🍥</h1>
 
     <p style="text-align: center;">로그인을 한 후 채팅을 할 수 있습니다.</p>
 
+    <script>
+        fetch('/check-auth')
+            .then(response => response.json())
+            .then(data => {
+                const isAuthenticated = data.isAuthenticated;
+
+                if (isAuthenticated) {
+                    const loginLink = document.getElementById('loginLink');
+                    const registerLink = document.getElementById('registerLink');
+                    loginLink.style.display = 'none';
+                    registerLink.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('로그인 상태 확인 중 오류 발생:', error);
+            });
+    </script>
 </body>
 
 </html>
