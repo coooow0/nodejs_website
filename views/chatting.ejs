@@ -31,36 +31,15 @@
         </div>
         <form class="chat-input-form">
             <input type="text" class="chat-input" required placeholder="Type here, 영이..." />
+            <label for="file">
+                <div class="button send-button">파일</div>
+              </label>
+              <input type="file" name="file" id="file">
             <button type="submit" class="button send-button">작성</button>
         </form>
         <button class="button clear-chat-button">채팅 지우기</button>
     </div>
     <script src="app.js"></script>
-    <script>
-    function sendMessage(e) {
-        e.preventDefault();
-
-        const timestamp = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-        const message = {
-            sender: messageSender,
-            text: chatInput.value,
-            timestamp,
-        };
-
-        messages.push(message);
-        localStorage.setItem('messages', JSON.stringify(messages));
-
-        const chatMessages = document.querySelector('.chat-messages');
-        chatMessages.innerHTML += `<div class="message">
-                                        <div class="message-sender">${message.sender}</div>
-                                        <div class="message-text">${message.text}</div>
-                                        <div class="message-timestamp">${message.timestamp}</div>
-                                    </div>`;
-
-        chatInputForm.reset();
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-</script>
 
 </body>
 

@@ -95,3 +95,27 @@ function sendMessage(e) {
     chatInputForm.reset();
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+function sendMessage(e) {
+    e.preventDefault();
+
+    const timestamp = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    const message = {
+        sender: messageSender,
+        text: chatInput.value,
+        timestamp,
+    };
+
+    messages.push(message);
+    localStorage.setItem('messages', JSON.stringify(messages));
+
+    const chatMessages = document.querySelector('.chat-messages');
+    chatMessages.innerHTML += `<div class="message">
+                                    <div class="message-sender">${message.sender}</div>
+                                    <div class="message-text">${message.text}</div>
+                                    <div class="message-timestamp">${message.timestamp}</div>
+                                </div>`;
+
+    chatInputForm.reset();
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}

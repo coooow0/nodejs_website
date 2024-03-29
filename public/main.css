@@ -65,14 +65,14 @@ div>.nav {
     font-family: 'GmarketSansMedium';
 }
 
-.button {
+.button, .file-input-label {
     border: none;
     padding: 0.625em;
     border-radius: 0.5em;
     cursor: pointer;
 }
 
-.button:hover {
+.button:hover{
     filter: brightness(0.9);
 }
 
@@ -248,3 +248,8 @@ div>.nav {
     justify-content: center;
     align-items: center;
 }
+
+
+#file {
+    display: none;
+  }
