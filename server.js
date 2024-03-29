@@ -6,6 +6,8 @@ const flash = require('express-flash');
 const bodyParser = require('body-parser');
 const { ObjectId } = require('mongodb');
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+
 const bcrypt = require('bcrypt')
 const MongoStore = require('connect-mongo')
 
@@ -55,7 +57,7 @@ function account(req, res, next){
     if (!req.user){
         res.render('login.ejs')
     }
-    next()
+    else next()
 }
 
 
@@ -143,4 +145,19 @@ app.post('/register', async (req, res) => {
 })
 
 
-// 로그인 해싱까지 완료 소켓아이오, 등등.. 해야댐 ㅜㅜ 
+app.post('/chatting', async (req, res) => {
+    console.log(req.body)
+    const text = req.body.text; // 입력된 문자열 가져오기
+    try {
+        // 데이터베이스에 입력된 문자열 저장
+        await db.collection('chat_messages').insertOne({
+            text: text,
+            sender: '영이', // 임의의 sender로 설정, 필요에 따라 변경 가능
+            timestamp: new Date() // 현재 시간을 저장할 수도 있습니다.
+        });
+        res.redirect('/chatting'); // 채팅 페이지로 리디렉션
+    } catch (error) {
+        console.error('문자열을 저장하는 동안 오류가 발생했습니다:', error);
+        res.status(500).send('서버 오류');
+    }
+});
