@@ -1,4 +1,5 @@
-let messageSender; // 전역 변수로 선언
+// app.js 파일
+let messageSender= '영이'; // 전역 변수로 선언
 
 function updateMessageSender(name) {
     messageSender = name; // sender 정보를 전역 변수에 저장
@@ -23,12 +24,14 @@ function updateMessageSender(name) {
     chatInput.focus();
 }
 
+
+
 document.getElementById('young-selector').addEventListener('click', function () {
-    updateMessageSender('영이');
+    updateMessageSender('영이'); // 영이 버튼 클릭 시 messageSender에 '영이' 할당
 });
 
 document.getElementById('ming-selector').addEventListener('click', function () {
-    updateMessageSender('밍기');
+    updateMessageSender('밍기'); // 밍기 버튼 클릭 시 messageSender에 '밍기' 할당
 });
 
 document.querySelector('.chat-input-form').addEventListener('submit', function (event) {
@@ -76,6 +79,9 @@ clearChatBtn.addEventListener('click', () => {
     chatMessages.innerHTML = '';
 });
 
+
+document.querySelector('.chat-input-form').addEventListener('submit', sendMessage);
+
 function sendMessage(e) {
     e.preventDefault();
 
@@ -106,6 +112,7 @@ function sendMessage(e) {
     // 스크롤을 가장 아래로 이동
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
 
 function getActivePersonName() {
     const activePersonButton = document.querySelector('.active-person');
