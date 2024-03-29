@@ -147,12 +147,12 @@ app.post('/register', async (req, res) => {
 
 app.post('/chatting', async (req, res) => {
     console.log(req.body);
-    // const { text, sender } = req.body; // req.body에서 sender와 text를 읽어들임
+    // const { text, senderName } = req.body; // req.body에서 senderName과 text를 읽어들임
     // try {
     //     // 데이터베이스에 입력된 문자열과 보내는 사람 저장
     //     await db.collection('chat_messages').insertOne({
     //         text: text,
-    //         sender: sender,
+    //         senderName: senderName,
     //         timestamp: new Date() // 현재 시간을 저장할 수도 있습니다.
     //     });
     //     res.redirect('/chatting'); // 채팅 페이지로 리디렉션
@@ -161,3 +161,4 @@ app.post('/chatting', async (req, res) => {
     //     res.status(500).send('서버 오류');
     // }
 });
+
