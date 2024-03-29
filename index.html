@@ -32,6 +32,9 @@
                     const registerLink = document.getElementById('registerLink');
                     loginLink.style.display = 'none';
                     registerLink.style.display = 'none';
+                } else {
+                    const logoutLink = document.getElementById('logoutLink');
+                    logoutLink.style.display = 'none';
                 }
             })
             .catch(error => {
