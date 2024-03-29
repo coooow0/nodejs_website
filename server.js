@@ -24,7 +24,7 @@ const LocalStrategy = require('passport-local')
 
 app.use(passport.initialize())
 app.use(session({
-    secret: '암호화에 쓰일 비번',
+    secret: process.env.SESSION_PSWD,
     resave: false, // 유저가 서버로 요청할 때마다 세션 갱신할 것인지?
     saveUninitialized: false, // 로그인 안 해도 세션 만들것인지?
     cookie: { maxAge: 60 * 60 * 1000 },
@@ -51,20 +51,25 @@ new MongoClient(url).connect().then((client) => {
 
 })
 
+function account(req, res, next){
+    if (!req.user){
+        res.render('login.ejs')
+    }
+    next()
+}
 
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
-
 })
 
 
-app.get('/list', async (req, res) => {
+app.get('/list',account, async (req, res) => {
     let result = await db.collection('post').find().toArray()
     res.send(result[0].title)
 })
 
-app.get('/chatting', async (req, res) => {
+app.get('/chatting',account, async (req, res) => {
     res.render('chatting.ejs')
 })
 
@@ -136,3 +141,6 @@ app.post('/register', async (req, res) => {
         res.redirect('/')
     }
 })
+
+
+// 로그인 해싱까지 완료 소켓아이오, 등등.. 해야댐 ㅜㅜ 
