@@ -1,6 +1,11 @@
 // app.js 파일
 let messageSender= '영이'; // 전역 변수로 선언
 
+function getActivePersonName() {
+    const activePersonButton = document.querySelector('.active-person');
+    return activePersonButton.textContent;
+}
+
 function updateMessageSender(name) {
     messageSender = name; // sender 정보를 전역 변수에 저장
     const chatHeader = document.querySelector('.chat-header');
@@ -113,8 +118,3 @@ function sendMessage(e) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-
-function getActivePersonName() {
-    const activePersonButton = document.querySelector('.active-person');
-    return activePersonButton.textContent;
-}
