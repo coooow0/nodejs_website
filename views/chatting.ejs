@@ -10,34 +10,32 @@
 
 <body class="chat-body">
     <%- include('nav.ejs') %>
-        <div class="person-selector">
-            <button class="button person-selector-button active-person" id="young-selector"
-                onclick="updateMessageSender('영이')">영이</button>
-            <button class="button person-selector-button" id="ming-selector"
-                onclick="updateMessageSender('밍기')">밍기</button>
-        </div>
-        <div class="chat-container">
-            <h2 class="chat-header">영이 chatting...</h2>
+    <div class="person-selector">
+        <button class="button person-selector-button active-person" id="young-selector"
+            onclick="updateMessageSender('영이')">영이</button>
+        <button class="button person-selector-button" id="ming-selector"
+            onclick="updateMessageSender('밍기')">밍기</button>
+    </div>
+    <div class="chat-container">
+        <h2 class="chat-header">영이 chatting...</h2>
 
-            <div class="chat-messages">
-                <div class="message blue-bg">
-                    <div class="message-sender">영이</div>
-                    <div class="meaasge-text">어서오떼요🫧</div>
-                    <div class="message-timestamp"></div>
-                </div>
-                <div class="message gray-bg">
-                    <div class="message-sender">밍기</div>
-                    <div class="message-text">👻👻👻👻</div>
-                    <div class="message-timestamp"></div>
-                </div>
+        <div class="chat-messages">
+            <% messages.forEach(message => { %>
+            <div class="message <%= message.senderName === '영이' ? 'blue-bg' : 'gray-bg' %>">
+                <div class="message-sender"><%= message.senderName %></div>
+                <div class="message-text"><%= message.text %></div>
+                <div class="message-timestamp"><%= message.timestamp %></div>
             </div>
-            <form class="chat-input-form" enctype="multipart/form-data" method="POST">
-                <input type="text" name="text" class="chat-input" required placeholder="Type here, 영이..." />
-                <button type="submit" class="button send-button">작성</button>
-            </form>
-            <button class="button clear-chat-button">채팅 지우기</button>
+            <% }) %>
         </div>
-        <script src="app.js"></script>
+        <form class="chat-input-form" enctype="multipart/form-data" method="POST">
+            <input type="text" name="text" class="chat-input" required placeholder="Type here, 영이..." />
+            <input type="hidden" name="sender" value="영이"> <!-- 기본 보내는 사람 설정 -->
+            <button type="submit" class="button send-button">작성</button>
+        </form>
+        <button class="button clear-chat-button">채팅 지우기</button>
+    </div>
+    <script src="app.js"></script>
 
 </body>
 

@@ -76,8 +76,15 @@ app.get('/list', account, async (req, res) => {
 })
 
 app.get('/chatting', account, async (req, res) => {
-    res.render('chatting.ejs')
-})
+    try {
+        const messages = await db.collection('chat_messages').find().toArray()
+        res.render('chatting.ejs', { messages: messages, messageSender: req.body.sender, timestamp:req.body.timestamp });
+    } catch (error) {
+        console.error('채팅 메시지를 렌더링하는 동안 오류가 발생했습니다:', error);
+        res.status(500).send('서버 오류');
+    }
+});
+
 
 passport.use(new LocalStrategy(async (username, password, cb) => { // 인자 이름 수정
     let result = await db.collection('user').findOne({ username: username }); // username 사용
@@ -168,7 +175,7 @@ app.post('/chatting', async (req, res) => {
         await db.collection('chat_messages').insertOne({
             text: req.body.text,
             senderName: req.body.sender,
-            timestamp: new Date() // 현재 시간을 저장할 수도 있습니다.
+            timestamp: new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) // 현재 시간을 저장할 수도 있습니다.
         });
         res.redirect('/chatting'); // 채팅 페이지로 리디렉션
     } catch (error) {
